@@ -39,6 +39,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -56,7 +57,7 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun App(paddingValues: PaddingValues = WindowInsets.systemBars.asPaddingValues()) {
-	val bubbleState = rememberStickyBubbleState()
+	val bubbleState = rememberStickyBubbleState(initialOffset = Offset(Float.POSITIVE_INFINITY, 800f))
 	val bottomPadding = paddingValues.calculateBottomPadding()
 	val topPadding = paddingValues.calculateTopPadding()
 	Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
