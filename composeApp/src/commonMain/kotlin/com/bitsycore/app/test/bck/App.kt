@@ -41,6 +41,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import bitsycomposekit.composeapp.generated.resources.Res
 import bitsycomposekit.composeapp.generated.resources.baseline_close_24
@@ -56,13 +57,15 @@ import org.jetbrains.compose.resources.painterResource
 @Composable
 fun App(paddingValues: PaddingValues = WindowInsets.systemBars.asPaddingValues()) {
 	val bubbleState = rememberStickyBubbleState()
+	val bottomPadding = paddingValues.calculateBottomPadding()
+	val topPadding = paddingValues.calculateTopPadding()
 	Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-		Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
+		Box(modifier = Modifier.fillMaxSize()) {
 
 			// -------------------------------------
 			// MARK: SCREEN CONTENT
 
-			ScreenContent(bubbleState)
+			ScreenContent(topPadding, bottomPadding, bubbleState)
 
 			// -------------------------------------
 			// MARK: REMOVE ZONE
@@ -120,6 +123,8 @@ fun App(paddingValues: PaddingValues = WindowInsets.systemBars.asPaddingValues()
 	) {
 		BubbleExpandedContent(bubbleState)
 	}
+
+	Spacer(modifier = Modifier.height(bottomPadding))
 }
 
 @Composable
@@ -182,7 +187,7 @@ private fun BoxScope.BottomRemoveZone(bubbleState: StickyBubbleState) {
 private fun BoxScope.CircleRemoveZone(bubbleState: StickyBubbleState) {
 	BubbleRemoveZone(
 		bubbleState = bubbleState,
-		modifier = Modifier.align(Alignment.BottomCenter).padding(16.dp),
+		modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 80.dp),
 		content = { inRemoveZone, _ ->
 			// Use inRemove zone to animate icon color change between two colors
 			val iconColor by animateColorAsState(if (inRemoveZone) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface)
@@ -197,10 +202,12 @@ private fun BoxScope.CircleRemoveZone(bubbleState: StickyBubbleState) {
 }
 
 @Composable
-private fun ScreenContent(bubbleState: StickyBubbleState) {
+private fun ScreenContent(topPadding: Dp, bottomPadding: Dp, bubbleState: StickyBubbleState) {
 	Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp)) {
+		Spacer(modifier = Modifier.height(topPadding))
+
 		Text("Main Content", Modifier.fillMaxWidth(), style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
-		repeat(20) {
+		repeat(10) {
 			AnimatedVisibility(bubbleState.isHidden()) {
 				Button(onClick = { bubbleState.showBubble() }, Modifier.fillMaxWidth().padding(top = 32.dp)) {
 					Text("Show Bubble Again")
@@ -229,5 +236,6 @@ private fun ScreenContent(bubbleState: StickyBubbleState) {
 				}
 			}
 		}
+		Spacer(modifier = Modifier.height(bottomPadding))
 	}
 }
