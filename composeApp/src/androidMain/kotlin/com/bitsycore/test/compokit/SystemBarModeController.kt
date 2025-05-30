@@ -1,4 +1,4 @@
-package com.bitsycore.app.test.bck
+package com.bitsycore.test.compokit
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -30,21 +30,25 @@ object SystemBarModeController {
 				if (light) WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS else 0,
 				WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 			)
-		} else {
+		} else if (Build.VERSION.SDK_INT >= 23) {
 			val decorView = window.decorView
+			@Suppress("DEPRECATION")
 			var flags = decorView.systemUiVisibility
+			@Suppress("DEPRECATION")
 			flags = if (light) {
 				flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 			} else {
 				flags and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
 			}
+			@Suppress("DEPRECATION")
 			decorView.systemUiVisibility = flags
 		}
 		setMIUIStatusBarDarkIcon(window, light)
 		setFlymeStatusBarDarkIcon(window, light)
 	}
 
-	private fun setNavigationBarLightMode(window: Window, light: Boolean) {
+	private fun setNavigationBarLightMode(window: Window, light: Boolean) =
+		@Suppress("DEPRECATION")
 		if (Build.VERSION.SDK_INT >= 30) {
 			window.insetsController?.setSystemBarsAppearance(
 				if (light) WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS else 0,
@@ -59,13 +63,12 @@ object SystemBarModeController {
 				flags and View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR.inv()
 			}
 			decorView.systemUiVisibility = flags
+		} else {
 		}
-	}
 
 	private fun setMIUIStatusBarDarkIcon(window: Window, dark: Boolean) {
 		try {
 			val clazz: Class<out Window> = window.javaClass
-
 			@SuppressLint("PrivateApi")
 			val layoutParams = Class.forName("android.view.MiuiWindowManager\$LayoutParams")
 			val field: Field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE")

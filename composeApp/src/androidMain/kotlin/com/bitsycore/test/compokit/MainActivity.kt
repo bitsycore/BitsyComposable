@@ -1,4 +1,4 @@
-package com.bitsycore.app.test.bck
+package com.bitsycore.test.compokit
 
 import android.os.Build
 import android.os.Bundle

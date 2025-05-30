@@ -19,27 +19,15 @@ kotlin {
     jvm("desktop")
     
     sourceSets {
-        val desktopMain by getting
-
-        desktopMain.dependencies {
-            implementation(compose.desktop.common)
-        }
-
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodel)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            api(projects.compoKitCommon)
+            api(projects.compoKitBubble)
         }
     }
 }
 
 android {
-    namespace = "com.bitsycore.compose.kit"
+    namespace = "com.bitsycore.compokit"
     compileSdk = 36
 
     defaultConfig {
@@ -54,9 +42,5 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 }

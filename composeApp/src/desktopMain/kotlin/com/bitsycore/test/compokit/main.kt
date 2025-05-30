@@ -1,4 +1,4 @@
-package com.bitsycore.app.test.bck
+package com.bitsycore.test.compokit
 
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -12,7 +12,7 @@ fun main() = application {
 		state = rememberWindowState(
 			size = DpSize(720.dp, 960.dp)
 		),
-		title = "BitsyComposeKit - Demo App",
+		title = "CompoKit - Demo App",
 	) {
 		App()
 	}

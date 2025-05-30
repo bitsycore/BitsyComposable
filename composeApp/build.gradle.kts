@@ -15,7 +15,7 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
     
@@ -29,7 +29,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
         }
         commonMain.dependencies {
-            implementation(projects.composeKit)
+            implementation(projects.compoKit)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -50,11 +50,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.bitsycore.app.test.bck"
+    namespace = "com.bitsycore.test.compokit"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.bitsycore.app.test.bck"
+        applicationId = "com.bitsycore.test.compokit"
         minSdk = 21
         targetSdk = 36
         versionCode = 1
@@ -81,16 +81,16 @@ dependencies {
 }
 
 tasks.withType<ComposeHotRun>().configureEach {
-    mainClass.set("com.bitsycore.app.test.bck.MainKt")
+    mainClass.set("com.bitsycore.test.compokit.MainKt")
 }
 
 compose.desktop {
     application {
-        mainClass = "com.bitsycore.app.test.bck.MainKt"
+        mainClass = "com.bitsycore.test.compokit.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.bitsycore.app.test.bck"
+            packageName = "com.bitsycore.test.compokit"
             packageVersion = "1.0.0"
         }
     }

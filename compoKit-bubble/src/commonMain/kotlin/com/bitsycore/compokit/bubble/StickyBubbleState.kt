@@ -1,4 +1,4 @@
-package com.bitsycore.compose.kit.bubble
+package com.bitsycore.compokit.bubble
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec

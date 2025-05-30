@@ -1,4 +1,4 @@
-package com.bitsycore.compose.kit.common
+package com.bitsycore.compokit.common
 
 import androidx.compose.ui.Modifier
 

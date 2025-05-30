@@ -1,4 +1,4 @@
-package com.bitsycore.compose.kit.bubble
+package com.bitsycore.compokit.bubble
 
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.Spring
@@ -31,7 +31,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.bitsycore.compose.kit.common.thenIf
+import com.bitsycore.compokit.common.thenIf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt

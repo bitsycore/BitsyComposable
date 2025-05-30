@@ -20,7 +20,10 @@ plugins {
 }
 
 include(":composeApp")
-include(":composeKit")
 
-rootProject.name = "BitsyComposeKit"
+include(":compoKit")
+include(":compoKit-bubble")
+include(":compoKit-common")
+
+rootProject.name = "ProjectCompoKit"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
