@@ -1,25 +1,28 @@
 package com.bitsycore.app.test.bck
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.dynamicLightColorScheme
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        enableEdgeToEdge()
-        super.onCreate(savedInstanceState)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		enableEdgeToEdge()
+		super.onCreate(savedInstanceState)
 
-        setContent {
-            App()
-        }
-    }
-}
-
-@Preview
-@Composable
-fun AppAndroidPreview() {
-    App()
+		setContent {
+			SystemBarModeController.setLightMode(this)
+			val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+				dynamicLightColorScheme(this)
+			} else {
+				MaterialTheme.colorScheme
+			}
+            MaterialTheme(colorScheme = colorScheme) {
+                App()
+            }
+		}
+	}
 }
